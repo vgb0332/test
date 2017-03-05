@@ -116,76 +116,57 @@ var imageSize = new daum.maps.Size(24, 35);
 // 마커 이미지를 생성합니다
 var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
 
-    // 마커를 생성합니다
-    /*
-    var marker = [];
-    marker.push(new daum.maps.Marker({
-      map: map, // 마커를 표시할 지도
-      position: positions[0].latlng, // 마커를 표시할 위치
-      title : positions[0].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-      image : markerImage // 마커 이미지
-    });
-    */
-        var marker = [parkName.length+1];
-        var overlay = [parkName.legnth+1];
-        var i = 0;
+var content = '<div class="wrap">' +
+        '    <div class="info">' +
+        '        <div class="title">' +
+        '            카카오 스페이스닷원' +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        '        </div>' +
+        '        <div class="body">' +
+        '            <div class="img">' +
+        '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+        '           </div>' +
+        '            <div class="desc">' +
+        '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' +
+        '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
+        '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
+        '            </div>' +
+        '        </div>' +
+        '    </div>' +
+        '</div>';
+
+
+// 마커를 생성합니다
+var marker = [parkName.length+1];
+var overlay = [parkName.length+1];
+var target_index;
+
+for(var i = 0; i < 3; ++i){
     marker[i] = new daum.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: positions[i].latlng, // 마커를 표시할 위치
         title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        zIndex: i, //마커에 Z-index 추가
         image : markerImage // 마커 이미지
-    });
+        });
 
-    marker[i+1] = new daum.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        position: positions[i+1].latlng, // 마커를 표시할 위치
-        title : positions[i+1].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        image : markerImage // 마커 이미지
-    });
-    var content = '<div class="wrap">' +
-            '    <div class="info">' +
-            '        <div class="title">' +
-            '            카카오 스페이스닷원' +
-            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
-            '        </div>' +
-            '        <div class="body">' +
-            '            <div class="img">' +
-            '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-            '           </div>' +
-            '            <div class="desc">' +
-            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' +
-            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-            '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
-            '            </div>' +
-            '        </div>' +
-            '    </div>' +
-            '</div>';
-
-            // 마커 위에 커스텀오버레이를 표시합니다
-            // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-    var overlay = new daum.maps.CustomOverlay({
+    // 마커 위에 커스텀오버레이를 표시합니다
+    // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+    overlay[i] = new daum.maps.CustomOverlay({
           content: content,
           map: map,
           position: marker[i].getPosition()
-      });
-
-      var overlay2 = new daum.maps.CustomOverlay({
-            content: content,
-            map: map,
-            position: marker[i+1].getPosition()
         });
-
-    daum.maps.event.addListener(marker[i], 'click', function() {
-        overlay.setMap(map);
+    overlay[i].setMap(null);
+    daum.maps.event.addListener(marker[i], 'click', function(){
+          //alert("This is " + this.getZIndex()+  " index");
+          target_index = this.getZIndex();
+          overlay[target_index].setMap(map);
     });
-
-    daum.maps.event.addListener(marker[i+1], 'click', function() {
-        overlay2.setMap(map);
-    });
-    // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
-    function closeOverlay() {
-    overlay.setMap(null);
-    }
+}
+function closeOverlay() {
+  overlay[target_index].setMap(null);
+  }
 
 
 </script>
