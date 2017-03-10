@@ -1,3 +1,3 @@
 <?php
-echo $_GET['name'].",".$_GET['id'];
+echo $_GET['name'].",".$_GET['good'];
 ?>
