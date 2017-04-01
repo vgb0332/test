@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8">
+</head>
+<body>
+  HI
+  <script type="text/javascript">
+  document.write("HI");
+  var xhr = new XMLHttpRequest();
+  document.write("HI");
+  var url = 'http://apis.data.go.kr/1611000/BldRgstService/getBrJijiguInfo'); /*URL*/
+  var queryParams = '?' + encodeURIComponent('ServiceKey=oGtUrVlMjVSHd81jyy%2BVZ1WhUbIlI4ZIJQromneMKUaymmZjRFePLqq0vD7D4gJd43cC%2BFTEoeWTYf9BXTkFtw%3D%3D'); /*Service Key*/
+  queryParams += '&' + encodeURIComponent('bjdongCd') + '=' + encodeURIComponent('10300'); /*행정표준코드*/
+  queryParams += '&' + encodeURIComponent('platGbCd') + '=' + encodeURIComponent('0'); /*0:대지 1:산 2:블록*/
+  queryParams += '&' + encodeURIComponent('bun') + '=' + encodeURIComponent('0012'); /*번*/
+  queryParams += '&' + encodeURIComponent('ji') + '=' + encodeURIComponent('0000'); /*지*/
+  queryParams += '&' + encodeURIComponent('startDate') + '=' + encodeURIComponent(''); /*YYYYMMDD*/
+  queryParams += '&' + encodeURIComponent('endDate') + '=' + encodeURIComponent(''); /*YYYYMMDD*/
+  queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /*페이지당 목록 수*/
+  queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지번호*/
+  queryParams += '&' + encodeURIComponent('sigunguCd') + '=' + encodeURIComponent('11680'); /*행정표준코드*/
+  xhr.open('GET', url + queryParams);
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4) {
+        alert('Status: '+this.status+' Headers: '+JSON.stringify(this.getAllResponseHeaders())+' Body: '+this.responseText);
+      }
+    };
+
+    xhr.send('');
+  </script>
+</body>
+</html>
