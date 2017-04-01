@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>키워드로 장소검색하고 목록으로 표출하기</title>
+  <link rel="stylesheet" type="text/css" href="main_css.css">
+  <link rel="stylesheet" type="text/css" href="main_css2.css">
+  <style media="screen">
+  #menu_hide {position: absolute;top:80px;width:300px;height:500px;margin-left:10px;overflow-y:auto;background:rgba(255,255,255,1.7);z-index: 1;font-size: 12px;border-radius: 0px 0px 10px 10px;}
+
+
+  </style>
+</head>
+<body>
+<div class="info_window">
+  <div id="info" style="display:none;width:30%;height:100%;position:absolute;overflow:hidden;background:blue;">
+    what's going on?
+  </div>
+
+</div>
+<div class="map_wrap">
+    <div id="map" style="left:0%; width:100%;height:100%;position:relative;overflow:hidden;"></div>
+
+    <!--좌측 상위 검색 메뉴 div 입니다 -->
+    <div id="search_wrap" class="bg_white">
+      <div class="search_option">
+          <div>
+              <form onsubmit="searchPlaces(); return false;">
+                  키워드 : <input type="text" value="호갱노노짭" id="keyword" size="15">
+                  <button type="submit">검색하기</button>
+              </form>
+          </div>
+      </div>
+    </div>
+
+    <div id="menu_wrap" class="bg_white">
+      <div class="menu_option">
+        <div>
+          <form onclick = "menuButtonEvent()">
+            <button id="menu1" type="button" name="button">메뉴1</button>
+            <button id="menu2" type="button" name="button">메뉴2</button>
+            <button id="menu3" type="button" name="button">MENU3</button>
+          </form>
+          <button id="menu4" type="button" name="button" onclick= "infoButtonEvent()">MENU4</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="menu_hide" class="bg_white" style="display:none">
+      <div class="menu_info">
+        <div>
+          info1 <hr> info2 <hr> info3 <hr> info4 <hr>
+        </div>
+      </div>
+    </div>
+
+    <!-- 지도타입 컨트롤 div 입니다 -->
+    <div class="custom_typecontrol radius_border">
+        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+    </div>
+    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+    <div class="custom_zoomcontrol radius_border">
+        <span onclick="zoomIn()"><img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>
+        <span onclick="zoomOut()"><img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+    </div>
+</div>
+
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=15f14e8ea6ccdce536900236805f090e&libraries=services,clusterer"></script>
+<script src="main_jsp.js" type="text/javascript"> </script>
+<script src="map_search.js" type="text/javascript"></script> 
+<script type="text/javascript">
+  function menuButtonEvent(){
+    if(document.getElementById("menu_hide").style.display==="none") document.getElementById("menu_hide").style.display="block";
+    else document.getElementById("menu_hide").style.display="none";
+  }
+
+  function infoButtonEvent(){
+    if(document.getElementById("info").style.display === "none") {
+      document.getElementById("info").style.display = "block";
+      document.getElementById("map").style.left = "30%";
+    }
+    else{
+      document.getElementById("map").style.left = "0%";
+      document.getElementById("info").style.display = "none";
+    }
+  }
+</script>
+
+
+
+</body>
+</html>

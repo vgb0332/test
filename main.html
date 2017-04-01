@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephono">
+	<title>다음 지도 API</title>
+</head>
+<body>
+
+	<div id="map" style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; overflow: hidden;"></div>
+	<script src="//apis.daum.net/maps/maps3.js?apikey=15f14e8ea6ccdce536900236805f090e"></script>
+	<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+		    mapOption = {
+		        center: new daum.maps.LatLng(37.56419, 126.97948), // 지도의 중심좌표
+		        level: 3, // 지도의 확대 레벨
+		        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
+		    };
+
+		// 지도를 생성한다
+		var map = new daum.maps.Map(mapContainer, mapOption);
+
+		// 지도 타입 변경 컨트롤을 생성한다
+		var mapTypeControl = new daum.maps.MapTypeControl();
+
+		// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+		map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+
+		// 지도에 확대 축소 컨트롤을 생성한다
+		var zoomControl = new daum.maps.ZoomControl();
+
+		// 지도의 우측에 확대 축소 컨트롤을 추가한다
+		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+		// 지도 확대 레벨 변화 이벤트를 등록한다
+		daum.maps.event.addListener(map, 'zoom_changed', function () {
+			console.log('지도의 현재 확대레벨은 ' + map.getLevel() +'레벨 입니다.');
+		});
+
+
+	</script>
+
+	div search_box{
+		width: 100%;
+		padding-bottom 75%;
+	}
+	<div></div>
+	<div id class="search_box">
+		<div class ="search_box_con">
+	<form>
+		<fieldset form>
+		<legend>SearchBox</legend>
+		<div class="keyword-group"></div>
+		<div>
+			<input type ="text" class="keyword" placeholder="RAIZ" data-ga-event="search, input">
+			<button type="submit" class="btn-search" data-ga-event="search, searchBtn">search</button>
+		</div>
+		<a href="#" class=Btn-home dara-ga-event="home,introLayerBtn">RAIZ</a>
+		</fieldset>
+	</form>
+</div>
+	</div>
+
+</body>
+</html>
